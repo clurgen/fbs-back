@@ -1,7 +1,6 @@
 import db from "../Database.js";
 import bcrypt from "bcrypt";
-import jsonwebtoken from "jsonwebtoken";
-import cookieParser from "cookie-parser";
+import Jwt from "../jwt.js";
 
 export default class UserController {
   static async inscription(req, res) {
@@ -36,16 +35,34 @@ export default class UserController {
     const type = req.body.type;
     const photo = req.body.photo;
 
-    const user = db.query("SELECT * FROM users where mail = ?", [mail]);
-    if (!user) res.status(400).json("Cet utilisateur n'existe pas");
+    db.query(
+      "SELECT * FROM users where mail = ?",
+      [mail],
+      async function (err, result, fields) {
+        if (err) throw err;
+        const user = Object.values(JSON.parse(JSON.stringify(result)));
+        if (!user) res.status(400).json("Cet utilisateur n'existe pas");
+        const dbPassword = await user[0].password;
 
-    const dbPassword = user.password;
-    bcrypt.compare(password, dbPassword).then((match) => {
-      if (!match) {
-        res.status(400).json({ error: "Mot de passe érroné" });
-      } else {
-        res.json("Connecté !");
+        const comparePassword = await bcrypt.compare(password, dbPassword);
+        console.log(comparePassword);
+        try {
+          if (comparePassword) {
+            const accessToken = Jwt.createTokens(user[0]);
+
+            res.cookie("accses-token", accessToken, {
+              maxAge: 60 * 60 * 24 * 30 * 100,
+              httpOnly: true,
+            });
+            res.json("Connecté !");
+          } else {
+            res.status(400).json({ error: "Mot de passe érroné" });
+          }
+        } catch (err) {
+          console.error(err);
+          res.status(500).send();
+        }
       }
-    });
+    );
   }
 }

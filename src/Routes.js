@@ -7,6 +7,9 @@ import Auth from "./Auth.js";
 
 var router = express.Router();
 
+router.get("/", (req, res) => {
+  res.send("yo !");
+});
 router.get("/articles", ArticleController.lesArticles);
 router.get("/article/:id", ArticleController.lArticle);
 router.post(

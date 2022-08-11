@@ -5,7 +5,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "build": "babel index.js -d dist",
+    "start": "npm run build && node dist/index.js",
     "server": "cross-env NODE_PORT=dev nodemon index.js"
   },
   "author": "clement-urgen",
@@ -14,6 +15,7 @@
     "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "jsonwebtoken": "^8.5.1",
@@ -21,6 +23,9 @@
     "mysql": "^2.18.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.18.10",
+    "@babel/core": "^7.18.10",
+    "@babel/preset-env": "^7.18.10",
     "nodemon": "^2.0.19"
   }
 }

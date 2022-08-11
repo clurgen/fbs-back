@@ -3,8 +3,8 @@ import express from "express";
 import router from "./src/Routes.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import http from "http";
 
-console.log(process.env.NODE_PORT);
 dotenv.config({
   path: `./${process.env.NODE_PORT}.env`,
 });

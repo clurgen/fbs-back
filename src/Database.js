@@ -2,7 +2,6 @@ import dotenv from "dotenv";
 dotenv.config();
 import mysql from "mysql";
 
-console.log(process.env.NODE_PORT, "2");
 dotenv.config({
   path: `./${process.env.NODE_PORT}.env`,
 });

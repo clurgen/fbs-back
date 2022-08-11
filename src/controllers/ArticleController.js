@@ -11,9 +11,10 @@ export default class ArticleController {
     const image = req.body.image;
     const urlVideo = req.body.video;
     const playlist = req.body.playlist;
+    const ressenti = req.body.ressenti;
 
     db.query(
-      "INSERT INTO Article (name, description, nbEpisodes, nbSaison, episode, avis, image, urlVideo, playlist) VALUES (?,?,?,?,?,?,?,?,?)",
+      "INSERT INTO Article (name, description, nbEpisodes, nbSaison, episode, avis, image, urlVideo, playlist, ressenti) VALUES (?,?,?,?,?,?,?,?,?,?)",
       [
         name,
         description,
@@ -24,6 +25,7 @@ export default class ArticleController {
         image,
         urlVideo,
         playlist,
+        ressenti,
       ],
       (err, results) => {
         if (err) {
@@ -54,7 +56,7 @@ export default class ArticleController {
         if (err) {
           console.log(err);
         } else {
-          console.log(results), res.json(results);
+          res.json(results);
         }
       }
     );
@@ -68,7 +70,7 @@ export default class ArticleController {
     const nbSaison = req.body.nbSaison;
     const episode = req.body.episode;
     const avis = req.body.avis;
-    const image = req.body.image;
+    const image = req.body[image];
     const urlVideo = req.body.video;
     const playlist = req.body.playlist;
 

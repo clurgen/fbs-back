@@ -1,2 +1,5 @@
 node_modules
 .env
+
+src/images/articles
+src/images/inscription

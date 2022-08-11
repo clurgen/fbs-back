@@ -34,6 +34,8 @@ export default class UserController {
     const password = req.body.password;
     const type = req.body.type;
     const photo = req.body.photo;
+    let status = 200;
+    let body = {};
 
     db.query(
       "SELECT * FROM users where mail = ?",
@@ -54,7 +56,8 @@ export default class UserController {
               maxAge: 60 * 60 * 24 * 30 * 100,
               httpOnly: true,
             });
-            res.json("Connecté !");
+            body = { user, accessToken };
+            res.json("Connecté");
           } else {
             res.status(400).json({ error: "Mot de passe érroné" });
           }
@@ -62,6 +65,7 @@ export default class UserController {
           console.error(err);
           res.status(500).send();
         }
+        res.status(status).json(body);
       }
     );
   }

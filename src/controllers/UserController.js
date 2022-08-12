@@ -1,4 +1,4 @@
-import db from "../Database";
+import db from "../Database.js";
 import bcrypt from "bcrypt";
 import Jwt from "../jwt";
 

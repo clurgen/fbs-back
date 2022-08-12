@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "copy": "copy production.env dist",
     "build": "babel ./src -d dist",
-    "start": "npm run build && npm run copy && node dist/index.js",
+    "start": "npm run build && node dist/index.js",
     "server": "cross-env NODE_PORT=dev nodemon src/index.js"
   },
   "author": "clement-urgen",

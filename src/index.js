@@ -21,7 +21,7 @@ app.use((req, res, next) => {
   );
   next();
 });
-app.use(cors());
+app.use(cors({ origin: true }));
 app.use("/", router);
 app.use(cookieParser());
 app.use("/src/images", express.static("src/images"));

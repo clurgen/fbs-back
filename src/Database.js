@@ -17,7 +17,7 @@ app.use((req, res, next) => {
   );
   next();
 });
-app.use(cors());
+app.use(cors({ origin: true }));
 
 const db = mysql.createConnection({
   user: DB_USER,

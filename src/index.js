@@ -4,9 +4,7 @@ import router from "./Routes.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
-dotenv.config({
-  path: `./${process.env.NODE_PORT}.env`,
-});
+dotenv.config();
 
 const { APP_PORT } = process.env;
 const app = express();

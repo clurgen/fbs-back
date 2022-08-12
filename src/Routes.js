@@ -14,15 +14,10 @@ router.get("/articles", ArticleController.lesArticles);
 router.get("/article/:id", ArticleController.lArticle);
 router.post(
   "/createArticle",
-  Auth.isAllowed([1]),
   Multer.upload("articles", "image"),
   ArticleController.creerArticle
 );
-router.put(
-  "/article/edit/:id",
-  Auth.isAllowed([1]),
-  ArticleController.updateArticle
-);
+router.put("/article/edit/:id", ArticleController.updateArticle);
 router.delete(
   "/article/delete/:id",
   Auth.isAllowed([1]),

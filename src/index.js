@@ -6,8 +6,8 @@ import cookieParser from "cookie-parser";
 
 dotenv.config();
 
-const { APP_PORT } = process.env;
-console.log(APP_PORT);
+const { PORT } = process.env;
+console.log(PORT);
 const app = express();
 app.use(express.json());
 app.use((req, res, next) => {
@@ -27,8 +27,8 @@ app.use("/", router);
 app.use(cookieParser());
 app.use("/src/images", express.static("src/images"));
 
-app.listen(APP_PORT, () => {
-  console.log("Yey, your server is running on port " + APP_PORT);
+app.listen(PORT, () => {
+  console.log("Yey, your server is running on port " + PORT);
 });
 
 export default app;

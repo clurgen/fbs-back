@@ -1,6 +1,7 @@
 node_modules
 .env
 dev.env
+.env.production
 
 dist
 src/images/articles

@@ -1,6 +1,6 @@
-import db from "../Database.js";
+import db from "../Database";
 import bcrypt from "bcrypt";
-import Jwt from "../jwt.js";
+import Jwt from "../jwt";
 
 export default class UserController {
   static async inscription(req, res) {

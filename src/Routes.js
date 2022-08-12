@@ -1,9 +1,9 @@
 import express from "express";
-import UserController from "./Controllers/UserController.js";
-import ArticleController from "./Controllers/ArticleController.js";
-import Jwt from "./jwt.js";
-import Multer from "./Multer.js";
-import Auth from "./Auth.js";
+import UserController from "./Controllers/UserController";
+import ArticleController from "./Controllers/ArticleController";
+import Jwt from "./jwt";
+import Multer from "./Multer";
+import Auth from "./Auth";
 
 var router = express.Router();
 

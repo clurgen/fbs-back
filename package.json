@@ -1,17 +1,18 @@
 {
-  "type": "module",
   "name": "back",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "babel index.js -d dist",
-    "start": "npm run build && node dist/index.js",
+    "copy": "cp production.env dist",
+    "build": "babel . -d dist --ignore node_modules",
+    "start": "npm run build && npm run copy && node dist/index.js",
     "server": "cross-env NODE_PORT=dev nodemon index.js"
   },
   "author": "clement-urgen",
   "license": "ISC",
   "dependencies": {
+    "all": "^0.0.0",
     "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -20,12 +21,14 @@
     "express": "^4.18.1",
     "jsonwebtoken": "^8.5.1",
     "multer": "^1.4.5-lts.1",
-    "mysql": "^2.18.1",
-    "@babel/cli": "^7.18.10",
-    "@babel/core": "^7.18.10",
-    "@babel/preset-env": "^7.18.10"
+    "mysql": "^2.18.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.18.10",
+    "@babel/core": "^7.18.10",
+    "@babel/node": "^7.18.10",
+    "@babel/preset-env": "^7.18.10",
+    "babel-plugin-module-resolver": "^4.1.0",
     "nodemon": "^2.0.19"
   }
 }

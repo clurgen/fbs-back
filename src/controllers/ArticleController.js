@@ -1,4 +1,4 @@
-import db from "../Database.js";
+import db from "../Database";
 
 export default class ArticleController {
   static async creerArticle(req, res) {

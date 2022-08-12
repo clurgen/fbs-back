@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "copy": "cp production.env dist",
-    "build": "babel . -d dist --ignore node_modules",
+    "copy": "copy production.env dist",
+    "build": "babel . -d dist --ignore node_modules,dist",
     "start": "npm run build && npm run copy && node dist/index.js",
     "server": "cross-env NODE_PORT=dev nodemon index.js"
   },

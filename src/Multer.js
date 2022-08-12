@@ -13,15 +13,15 @@ export default class Multer {
 
       const storage = multer.diskStorage({
         destination: (req, file, cb) => {
-          if (!fs.existsSync(`./src/images`)) fs.mkdirSync(`./images/`);
-          if (!fs.existsSync(`./src/images/${uploadPath}`))
-            fs.mkdirSync(`./src/images/${uploadPath}`);
-          cb(null, `./src/images/${uploadPath}`);
+          if (!fs.existsSync(`./images`)) fs.mkdirSync(`./images/`);
+          if (!fs.existsSync(`./images/${uploadPath}`))
+            fs.mkdirSync(`./images/${uploadPath}`);
+          cb(null, `./images/${uploadPath}`);
         },
         filename: (req, file, cb) => {
           const name = file.originalname.split(" ").join("_");
           const extension = MIME_TYPES[file.mimetype];
-          req.body[identifier] = `src/images/${uploadPath}/${
+          req.body[identifier] = `./images/${uploadPath}/${
             Date.now() + "." + extension
           }`;
           cb(null, Date.now() + "." + extension);

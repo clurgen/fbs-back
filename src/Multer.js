@@ -3,31 +3,21 @@ import path from "path";
 import fs from "fs";
 
 export default class Multer {
-  static upload(uploadPath, identifier) {
+  static upload(identifier) {
     return (req, res, next) => {
-      const MIME_TYPES = {
-        "image/jpg": "jpg",
-        "image/jpeg": "jpg",
-        "image/png": "png",
-      };
-
       const storage = multer.diskStorage({
-        destination: (req, file, cb) => {
-          if (!fs.existsSync(`./images`)) fs.mkdirSync(`./images/`);
-          if (!fs.existsSync(`./images/${uploadPath}`))
-            fs.mkdirSync(`./images/${uploadPath}`);
-          cb(null, `./images/${uploadPath}`);
-        },
-        filename: (req, file, cb) => {
-          const name = file.originalname.split(" ").join("_");
-          const extension = MIME_TYPES[file.mimetype];
-          req.body[identifier] = `./images/${uploadPath}/${
-            Date.now() + "." + extension
-          }`;
-          cb(null, Date.now() + "." + extension);
+        fileFilter: (req, file, cb) => {
+          const ext = path.extname(file.originalname);
+          if (ext !== ".jpg" && ext !== "jpeg" && ext !== "png") {
+            cb(
+              new Error(
+                "Les formats de fichiers autorisé sont jpg, jpeg et png"
+              )
+            );
+          }
+          cb(null, true);
         },
       });
-
       const upl = multer({ storage: storage }).single(identifier);
       upl(req, res, next, () => next());
     };

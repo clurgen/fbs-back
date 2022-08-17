@@ -12,18 +12,19 @@ import { verifySession } from "supertokens-node/recipe/session/framework/express
 import { SessionRequest } from "supertokens-node/framework/express";
 
 let { Google } = ThirdPartyEmailPassword;
+dotenv.config();
 
+console.log(process.env);
 supertokens.init({
   framework: "express",
   supertokens: {
-    connectionURI:
-      "https://731393011b3611ed8042dbc33e0dcfd5-us-east-1.aws.supertokens.io:3572",
-    apiKey: "Vbu3Pib2W8v6x8yaS5WjMZ9fVPcijn",
+    connectionURI: process.env.connectionURI,
+    apiKey: process.env.SP_API_KEY,
   },
   appInfo: {
     appName: "fbs",
-    apiDomain: "http://localhost:3001",
-    websiteDomain: "http://localhost:3000",
+    apiDomain: process.env.BACK_URL,
+    websiteDomain: process.env.FRONT_URL,
     apiBasePath: "/auth",
     websiteBasePath: "/auth",
   },
@@ -61,10 +62,7 @@ supertokens.init({
   ],
 });
 
-dotenv.config();
-
 const { PORT } = process.env;
-console.log(PORT);
 const app = express();
 
 app.use(express.json());

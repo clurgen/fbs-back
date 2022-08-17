@@ -1,6 +1,7 @@
 import express from "express";
 import UserController from "./controllers/UserController.js";
 import ArticleController from "./controllers/ArticleController.js";
+import FatmanController from "./controllers/FatmanController.js";
 import Jwt from "./jwt.js";
 import Multer from "./Multer.js";
 import Auth from "./Auth.js";
@@ -33,6 +34,24 @@ router.put(
 
 router.delete("/article/delete/:id", ArticleController.deleteArticle);
 
+router.get("/fatman/:id", FatmanController.leFatman);
+router.get("/fatmen", FatmanController.lesFatmen);
+router.post(
+  "/createFatman",
+  Multer.upload("image"),
+  FatmanController.creerFatman
+);
+router.put(
+  "/article/edit/:id",
+  Multer.upload("image"),
+  FatmanController.updateFatman
+);
+router.put(
+  "/fatman/nopicture/edit/:id",
+  FatmanController.updateFatmanSansImage
+);
+
+router.delete("/fatman/delete/:id", FatmanController.deleteFatman);
 // router.post("/inscription", UserController.inscription);
 // router.post("/connexion", UserController.connexion);
 // router.get("/profile", Jwt.validateToken, (req, res) => {
